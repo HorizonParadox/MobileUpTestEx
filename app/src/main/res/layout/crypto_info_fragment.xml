@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+  <com.google.android.material.appbar.AppBarLayout
+      android:id="@+id/AppBarLayout"
+      style="@style/Theme.MobileUpTestEx"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/myToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/toolbar_text"
+        tools:title="Bitcoin" />
+
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <ImageView
+      android:id="@+id/logoInfoIV"
+      android:layout_width="90dp"
+      android:layout_height="90dp"
+      android:src="@drawable/bitcoin"
+      android:layout_gravity="center"
+      android:layout_marginTop="8dp"/>
+
+  <LinearLayout
+      android:id="@+id/textLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:layout_marginTop="16dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp">
+
+  <TextView
+      android:id="@+id/descriptionTV"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:fontFamily="@font/roboto_medium"
+      android:textColor="@color/toolbar_text"
+      android:textSize="20sp"
+      tools:text="Описание" />
+
+  <TextView
+      android:id="@+id/descriptionInfoTV"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:textSize="16sp"
+      android:fontFamily="@font/roboto"
+      android:textColor="@color/toolbar_text"
+      android:layout_marginTop="8dp"
+
+      tools:text="Bitcoin is a decentralized cryptocurrency originally described in a 2008 whitepaper by a person, or group of people, using the alias Satoshi Nakamoto. It was launched soon after, in January 2009.\n\nBitcoin is a peer-to-peer online currency, meaning that all transactions happen directly between equal, independent network participants, without the need for any intermediary to permit or facilitate them. Bitcoin was created, according to Nakamoto’s own words, to allow “online payments to be sent directly from one party to another without going through a financial institution.”\nBitcoin is a peer-to-peer online currency, meaning that all transactions happen directly between equal, independent network participants, without the need for any intermediary to permit or facilitate them. Bitcoin was created, according to Nakamoto’s own words, to allow “online payments to be sent directly from one party to another without going through a financial institution.”" />
+
+  <TextView
+      android:id="@+id/categoryTV"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:fontFamily="@font/roboto_medium"
+      android:textColor="@color/toolbar_text"
+      android:textSize="20sp"
+      android:layout_marginTop="16dp"
+      tools:text="Категории"/>
+
+  <TextView
+      android:id="@+id/categoryInfoTV"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:fontFamily="@font/roboto_medium"
+      android:textColor="@color/toolbar_text"
+      android:textSize="16sp"
+      android:layout_marginTop="8dp"
+      tools:text="Smart Contract Platform, Ethereum Ecosystems"/>
+
+  </LinearLayout>
+
+</LinearLayout>

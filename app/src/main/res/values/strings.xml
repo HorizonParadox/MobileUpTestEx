@@ -1,0 +1,9 @@
+<resources>
+  <string name="app_name">MobileUpTestEx</string>
+  <string name="usd">USD</string>
+  <string name="eur">EUR</string>
+  <string name="tools_info">Bitcoin is a decentralized cryptocurrency originally described in a 2008 whitepaper by a person, or group of people, using the alias Satoshi Nakamoto. It was launched soon after, in January 2009.
+    Bitcoin is a peer-to-peer online currency, meaning that all transactions happen directly between equal, independent network participants, without the need for any intermediary to permit or facilitate them. Bitcoin was created, according to Nakamoto’s own words, to allow “online payments to be sent directly from one party to another without going through a financial institution.”
+    Bitcoin is a peer-to-peer online currency, meaning that all transactions happen directly between equal, independent network participants, without the need for any intermediary to permit or facilitate them. Bitcoin was created, according to Nakamoto’s own words, to allow “online payments to be sent directly from one party to another without going through a financial institution.”</string>
+  <string name="tools_category">Smart Contract Platform, Ethereum Ecosystems</string>
+</resources>

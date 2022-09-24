@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.MainFragment">
+
+  <com.google.android.material.appbar.AppBarLayout
+      android:id="@+id/AppBarLayout"
+      style="@style/Theme.MobileUpTestEx"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+      <androidx.appcompat.widget.Toolbar
+          android:id="@+id/myToolbar"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:background="?attr/colorPrimary"
+          android:minHeight="?attr/actionBarSize"
+          android:theme="?attr/actionBarTheme"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:title="Список криптовалют"
+          app:titleTextColor="@color/toolbar_text" />
+
+      <com.google.android.material.chip.ChipGroup
+          android:id="@+id/chip_group"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          app:singleSelection="true"
+          android:layout_marginStart="16dp"
+          android:layout_marginTop="8dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/myToolbar"
+          app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipUSD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:fontFamily="@font/roboto"
+            android:text="@string/usd"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:textEndPadding="24dp"
+            app:textStartPadding="28dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipEUR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="@string/eur"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:textEndPadding="24dp"
+            app:textStartPadding="28dp" />
+
+
+      </com.google.android.material.chip.ChipGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/recyclerView"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_marginTop="8dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/AppBarLayout"
+      tools:listitem="@layout/item_fragment_main" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
