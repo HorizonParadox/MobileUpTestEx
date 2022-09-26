@@ -8,7 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.github.mobileuptestex.APP
+import com.github.mobileuptestex.CryptoApp
 import com.github.mobileuptestex.databinding.FragmentMainBinding
+import com.github.mobileuptestex.network.remote.crypto.CryptoApi
 
 
 class MainFragment : Fragment() {
@@ -33,7 +35,7 @@ class MainFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-
+    viewModel.fetchCryptoList((activity?.application as CryptoApp).cryptoApi)
     // TODO: Use the ViewModel
   }
 
