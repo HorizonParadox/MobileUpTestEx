@@ -1,6 +1,7 @@
 package com.github.mobileuptestex.network.dto.crypto_list
 
 data class CryptoListResponseItem(
+  val id: String,
   val name: String,
   val image: String,
   val symbol: String,
