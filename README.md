@@ -11,3 +11,4 @@ Test task for MobileUp
   7. Доработка UI (ProgressBar, ErrorLayout): 1 час.
   8. Добавление Fragment Navigation: 30 минут.
   9. Исправление багов, "чистка" кода: 3 часа.
+  10. Наслаждение результатом: 5 минут.
