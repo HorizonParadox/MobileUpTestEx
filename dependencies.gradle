@@ -1,0 +1,25 @@
+ext.versions = [
+    lifecycle : '2.5.1',
+    retrofit2 : '2.9.0',
+    okHttp    : '4.9.3',
+    navigation: '2.5.2'
+]
+
+ext.libs = [
+    material          : "com.google.android.material:material:1.6.1",
+    constraintlayout  : "androidx.constraintlayout:constraintlayout:2.1.4",
+    lifecycleLiveData : "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle",
+    lifecycleViewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle",
+    lifecycleRuntime  : "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycle",
+    retrofit          : "com.squareup.retrofit2:retrofit:$versions.retrofit2",
+    gsonConverter     : "com.squareup.retrofit2:converter-gson:$versions.retrofit2",
+    okhttp            : "com.squareup.okhttp3:okhttp:$versions.okHttp",
+    loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$versions.okHttp",
+    hilt              : "com.google.dagger:hilt-android:2.44",
+    glide             : "com.github.bumptech.glide:glide:4.13.2",
+    navigationFragment: "androidx.navigation:navigation-fragment-ktx:$versions.navigation",
+    navigationUi      : "androidx.navigation:navigation-ui-ktx:$versions.navigation",
+    jsoup             : "org.jsoup:jsoup:1.15.3",
+    core              : 'androidx.core:core-ktx:1.7.0',
+    appcompat         : 'androidx.appcompat:appcompat:1.5.1'
+]

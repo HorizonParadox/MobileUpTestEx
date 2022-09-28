@@ -1,8 +1,8 @@
-package com.github.mobileuptestex.repository
+package com.github.mobileuptestex.di.repository
 
 import com.github.mobileuptestex.network.dto.crypto_Info.CryptoInfoResponse
 import com.github.mobileuptestex.network.dto.crypto_list.CryptoListResponse
-import com.github.mobileuptestex.network.remote.crypto.CryptoApi
+import com.github.mobileuptestex.network.remote.CryptoApi
 import javax.inject.Inject
 
 class CryptoRepositoryImpl @Inject

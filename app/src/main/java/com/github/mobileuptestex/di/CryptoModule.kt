@@ -1,8 +1,8 @@
-package com.github.mobileuptestex
+package com.github.mobileuptestex.di
 
-import com.github.mobileuptestex.network.remote.crypto.CryptoApi
-import com.github.mobileuptestex.repository.CryptoRepository
-import com.github.mobileuptestex.repository.CryptoRepositoryImpl
+import com.github.mobileuptestex.network.remote.CryptoApi
+import com.github.mobileuptestex.di.repository.CryptoRepository
+import com.github.mobileuptestex.di.repository.CryptoRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,7 +11,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module

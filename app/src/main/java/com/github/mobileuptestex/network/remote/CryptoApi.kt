@@ -1,8 +1,7 @@
-package com.github.mobileuptestex.network.remote.crypto
+package com.github.mobileuptestex.network.remote
 
 import com.github.mobileuptestex.network.dto.crypto_Info.CryptoInfoResponse
 import com.github.mobileuptestex.network.dto.crypto_list.CryptoListResponse
-import com.github.mobileuptestex.network.dto.crypto_list.CryptoListResponseItem
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

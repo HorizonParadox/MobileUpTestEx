@@ -1,9 +1,8 @@
 package com.github.mobileuptestex.use_cases
 
-import com.github.mobileuptestex.ResponseState
+import com.github.mobileuptestex.utils.ResponseState
 import com.github.mobileuptestex.network.dto.crypto_Info.CryptoInfoResponse
-import com.github.mobileuptestex.network.dto.crypto_list.CryptoListResponseItem
-import com.github.mobileuptestex.repository.CryptoRepository
+import com.github.mobileuptestex.di.repository.CryptoRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException

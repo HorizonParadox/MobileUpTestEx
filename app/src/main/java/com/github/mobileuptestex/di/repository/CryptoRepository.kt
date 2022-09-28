@@ -1,4 +1,4 @@
-package com.github.mobileuptestex.repository
+package com.github.mobileuptestex.di.repository
 
 import com.github.mobileuptestex.network.dto.crypto_Info.CryptoInfoResponse
 import com.github.mobileuptestex.network.dto.crypto_list.CryptoListResponse

@@ -1,44 +1,26 @@
 package com.github.mobileuptestex.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioGroup
-import android.widget.Toast
-import android.widget.Toast.makeText
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.mobileuptestex.APP
-import com.github.mobileuptestex.CryptoApp
-import com.github.mobileuptestex.ResponseState
-import com.github.mobileuptestex.adapter.CryptoAdapter
+import com.github.mobileuptestex.utils.APP
+import com.github.mobileuptestex.ui.main.recycler_view.CryptoAdapter
 import com.github.mobileuptestex.databinding.FragmentMainBinding
-import com.github.mobileuptestex.network.dto.crypto_list.CryptoListResponseItem
-import com.github.mobileuptestex.network.remote.crypto.CryptoApi
-import com.github.mobileuptestex.ui.crypto_info.CryptoInfoFragment
-import com.google.android.material.chip.ChipGroup
+import com.github.mobileuptestex.ui.SaveArgsModel
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.scopes.FragmentScoped
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
 
   private lateinit var binding: FragmentMainBinding
   private lateinit var cryptoAdapter: CryptoAdapter
-
-  companion object {
-    fun newInstance() = MainFragment()
-  }
-
+  private var currency = "usd"
   private lateinit var viewModel: MainViewModel
 
   override fun onCreateView(
@@ -46,45 +28,49 @@ class MainFragment : Fragment() {
     savedInstanceState: Bundle?
   ): View {
     binding = FragmentMainBinding.inflate(layoutInflater, container, false)
-    APP.setSupportActionBar(binding.myToolbar)
+    APP.setSupportActionBar(binding.mainFragmentToolbar)
     return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    initialization()
+  }
+
+  private fun initialization(){
+    viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+    val chipUsdId = binding.chipUSD.id
+    val chipEurId = binding.chipEUR.id
+
+    viewModel.getCryptoList(currency)
 
     cryptoAdapter = CryptoAdapter(object : CryptoAdapter.OnItemClickListener {
-      override fun onItemClick(info: String) {
+      override fun onItemClick(info: SaveArgsModel) {
 
-        val fragment = CryptoInfoFragment.newInstance()
-        val bundle = Bundle()
-        bundle.putString("cryptoId", info)
-        fragment.arguments = bundle
+        val action = MainFragmentDirections.actionMainFragmentToCryptoInfoFragment(info)
+        findNavController().navigate(action)
 
-        activity!!.supportFragmentManager.beginTransaction()
-          .replace(binding.mainFragment.id, fragment, "findThisFragment")
-          .addToBackStack(null)
-          .commit()
       }
     })
 
-    viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-    var currency = "usd"
-    viewModel.getCryptoList(currency)
-
     binding.chipGroup.setOnCheckedStateChangeListener { group, _ ->
+
       when (group.checkedChipId) {
-        2131361913 -> {
+        chipUsdId -> {
           currency = "usd"
           viewModel.getCryptoList(currency)
         }
-        2131361912 -> {
+        chipEurId -> {
           currency = "eur"
           viewModel.getCryptoList(currency)
         }
       }
     }
 
+    binding.errorButton.setOnClickListener {
+      viewModel.getCryptoList(currency)
+    }
 
     binding.recyclerView.apply {
       adapter = cryptoAdapter
@@ -93,27 +79,37 @@ class MainFragment : Fragment() {
     }
 
     lifecycleScope.launchWhenStarted {
-      viewModel._cryptoListValue.collect {
+      viewModel.cryptoListValue.collect {
 
-        if (it.isLoading)
-          binding.progressBar.visibility = View.VISIBLE
-        else
-          binding.progressBar.visibility = View.GONE
+        if (it.isLoading) loadView(binding)
+        else binding.progressBar.visibility = View.GONE
 
-        if (it.error!="") {
-          binding.recyclerView.visibility = View.GONE
-          binding.errorLayout.visibility = View.VISIBLE
-          binding.errorButton.setOnClickListener{
-            viewModel.getCryptoList(currency)
-          }
+        if (it.error) errorView(binding)
+        else binding.errorLayout.visibility = View.GONE
+
+        if (it.cryptoList.isNotEmpty()) {
+          dataView(binding)
+          cryptoAdapter.submitList(it.cryptoList, currency)
         }
-        else {
-          binding.recyclerView.visibility = View.VISIBLE
-          binding.errorLayout.visibility = View.GONE
-        }
-        cryptoAdapter.submitList(it.cryptoList)
       }
     }
   }
 
+  private fun loadView(binding: FragmentMainBinding) {
+    binding.progressBar.visibility = View.VISIBLE
+    binding.recyclerView.visibility = View.GONE
+    binding.errorLayout.visibility = View.GONE
+  }
+
+  private fun errorView(binding: FragmentMainBinding) {
+    binding.errorLayout.visibility = View.VISIBLE
+    binding.recyclerView.visibility = View.GONE
+    binding.progressBar.visibility = View.GONE
+  }
+
+  private fun dataView(binding: FragmentMainBinding) {
+    binding.recyclerView.visibility = View.VISIBLE
+    binding.progressBar.visibility = View.GONE
+    binding.errorLayout.visibility = View.GONE
+  }
 }
