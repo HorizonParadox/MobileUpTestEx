@@ -5,10 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioGroup
+import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.mobileuptestex.APP
 import com.github.mobileuptestex.CryptoApp
@@ -17,6 +21,8 @@ import com.github.mobileuptestex.adapter.CryptoAdapter
 import com.github.mobileuptestex.databinding.FragmentMainBinding
 import com.github.mobileuptestex.network.dto.crypto_list.CryptoListResponseItem
 import com.github.mobileuptestex.network.remote.crypto.CryptoApi
+import com.github.mobileuptestex.ui.crypto_info.CryptoInfoFragment
+import com.google.android.material.chip.ChipGroup
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.scopes.FragmentScoped
 import kotlinx.coroutines.Dispatchers
@@ -47,10 +53,38 @@ class MainFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    cryptoAdapter = CryptoAdapter()
+    cryptoAdapter = CryptoAdapter(object : CryptoAdapter.OnItemClickListener {
+      override fun onItemClick(info: String) {
+
+        val fragment = CryptoInfoFragment.newInstance()
+        val bundle = Bundle()
+        bundle.putString("cryptoId", info)
+        fragment.arguments = bundle
+
+        activity!!.supportFragmentManager.beginTransaction()
+          .replace(binding.mainFragment.id, fragment, "findThisFragment")
+          .addToBackStack(null)
+          .commit()
+      }
+    })
 
     viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-    viewModel.getCryptoList("usd")
+    var currency = "usd"
+    viewModel.getCryptoList(currency)
+
+    binding.chipGroup.setOnCheckedStateChangeListener { group, _ ->
+      when (group.checkedChipId) {
+        2131361913 -> {
+          currency = "usd"
+          viewModel.getCryptoList(currency)
+        }
+        2131361912 -> {
+          currency = "eur"
+          viewModel.getCryptoList(currency)
+        }
+      }
+    }
+
 
     binding.recyclerView.apply {
       adapter = cryptoAdapter
@@ -60,6 +94,23 @@ class MainFragment : Fragment() {
 
     lifecycleScope.launchWhenStarted {
       viewModel._cryptoListValue.collect {
+
+        if (it.isLoading)
+          binding.progressBar.visibility = View.VISIBLE
+        else
+          binding.progressBar.visibility = View.GONE
+
+        if (it.error!="") {
+          binding.recyclerView.visibility = View.GONE
+          binding.errorLayout.visibility = View.VISIBLE
+          binding.errorButton.setOnClickListener{
+            viewModel.getCryptoList(currency)
+          }
+        }
+        else {
+          binding.recyclerView.visibility = View.VISIBLE
+          binding.errorLayout.visibility = View.GONE
+        }
         cryptoAdapter.submitList(it.cryptoList)
       }
     }

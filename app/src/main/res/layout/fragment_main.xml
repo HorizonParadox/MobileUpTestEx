@@ -3,10 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/mainFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.MainFragment">
+    tools:context=".ui.main.MainFragment"
+    android:background="@color/white">
 
   <com.google.android.material.appbar.AppBarLayout
       android:id="@+id/AppBarLayout"
@@ -38,12 +39,13 @@
           android:id="@+id/chip_group"
           android:layout_width="0dp"
           android:layout_height="match_parent"
-          app:singleSelection="true"
           android:layout_marginStart="16dp"
           android:layout_marginTop="8dp"
+          app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/myToolbar"
-          app:layout_constraintBottom_toBottomOf="parent">
+          app:selectionRequired="true"
+          app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipUSD"
@@ -80,10 +82,77 @@
       android:layout_width="match_parent"
       android:layout_height="0dp"
       android:layout_marginTop="8dp"
+      android:visibility="gone"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/AppBarLayout"
       tools:listitem="@layout/item_fragment_main" />
+
+  <ProgressBar
+      android:id="@+id/progressBar"
+      android:layout_width="36dp"
+      android:layout_height="36dp"
+      android:indeterminateTint="@color/chip_text_selected"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/AppBarLayout"
+      android:visibility="gone"/>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/errorLayout"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/AppBarLayout">
+
+    <ImageView
+        android:id="@+id/errorIV"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:src="@drawable/bitcoin"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/errorTV"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+
+        android:text="@string/error"
+        android:textAlignment="center"
+        android:textColor="@color/toolbar_text"
+        android:textSize="14sp"
+        android:fontFamily="@font/plus_jakarta_sans_regular"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/errorIV"
+
+        android:layout_marginTop="12dp"/>
+
+    <Button
+        android:id="@+id/errorButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="@string/error_btn"
+        android:backgroundTint="@color/chip_text_selected"
+        android:textColor="@color/status_bar"
+        android:fontFamily="@font/roboto_medium"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/errorTV"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="32dp"/>
+  </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

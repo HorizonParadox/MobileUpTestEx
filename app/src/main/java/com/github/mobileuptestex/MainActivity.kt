@@ -3,6 +3,7 @@ package com.github.mobileuptestex
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.github.mobileuptestex.databinding.ActivityMainBinding
+import com.github.mobileuptestex.ui.crypto_info.CryptoInfoFragment
 import com.github.mobileuptestex.ui.main.MainFragment
 import dagger.hilt.android.AndroidEntryPoint
 

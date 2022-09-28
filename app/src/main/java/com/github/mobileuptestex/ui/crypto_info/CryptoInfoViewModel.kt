@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.github.mobileuptestex.ResponseState
 import com.github.mobileuptestex.use_cases.CryptoInfoState
 import com.github.mobileuptestex.use_cases.CryptoInfoUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class CryptoInfoViewModel @Inject
 constructor(private val cryptoInfoUseCase: CryptoInfoUseCase): ViewModel(){
   private val cryptoInfoValue = MutableStateFlow(CryptoInfoState())

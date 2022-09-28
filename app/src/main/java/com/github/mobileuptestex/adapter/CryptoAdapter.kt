@@ -18,7 +18,7 @@ import java.lang.Math.round
 import kotlin.math.floor
 import kotlin.math.roundToInt
 
-class CryptoAdapter : RecyclerView.Adapter<CryptoAdapter.CryptoViewHolder>() {
+class CryptoAdapter(private val param: OnItemClickListener) : RecyclerView.Adapter<CryptoAdapter.CryptoViewHolder>() {
 
 
   inner class CryptoViewHolder(val binding: ItemFragmentMainBinding) :
@@ -62,7 +62,6 @@ class CryptoAdapter : RecyclerView.Adapter<CryptoAdapter.CryptoViewHolder>() {
         cryptoNameTV.text = name
         cryptoAbbreviationTV.text = symbol
         cryptoPriceTV.text = "$ ${(current_price * 100.0).roundToInt() / 100.0}"
-        Log.d("PRICE", current_price.toString())
 
         if (price_change_percentage_24h.toString().contains("-")) {
           pricePercentTV.text = "${(price_change_percentage_24h * 100.0).roundToInt() / 100.0}%"
@@ -72,12 +71,19 @@ class CryptoAdapter : RecyclerView.Adapter<CryptoAdapter.CryptoViewHolder>() {
           pricePercentTV.text = "+${(price_change_percentage_24h * 100.0).roundToInt() / 100.0}%"
           pricePercentTV.setTextColor(pricePercentTV.resources.getColor(R.color.crypto_percent_pos))
         }
-        Log.d("PERCENT", price_change_percentage_24h.toString())
         Glide.with(logoIV).load(image).into(logoIV)
       }
+    }
 
+    holder.itemView.setOnClickListener {
+      param.onItemClick(currItem.id)
     }
   }
 
   override fun getItemCount() = differ.currentList.size
+
+  interface OnItemClickListener {
+    fun onItemClick(info: String)
+  }
+
 }
